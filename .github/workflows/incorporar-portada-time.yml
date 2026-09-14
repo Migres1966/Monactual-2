@@ -1,0 +1,38 @@
+name: Incorporar portada TIME
+on:
+  push:
+    paths:
+      - ".github/workflows/incorporar-portada-time.yml"
+permissions:
+  contents: write
+jobs:
+  incorpora:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descarrega i incorpora la portada
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p content/img
+          curl --fail --location --retry 3             --output content/img/portada-time-11s-2001.jpg             "https://content.time.com/time/covers/0,16641,20010914,00.jpg"
+          test -s content/img/portada-time-11s-2001.jpg
+          python3 - <<'PY'
+          from pathlib import Path
+          page = Path("html/1-sessio-1-el-mon-en-una-portada.html")
+          text = page.read_text(encoding="utf-8")
+          old = 'src="https://content.time.com/time/covers/0,16641,20010914,00.jpg"'
+          new = 'src="../content/img/portada-time-11s-2001.jpg"'
+          if old not in text:
+              raise SystemExit("No s’ha trobat la referència externa esperada")
+          page.write_text(text.replace(old, new, 1), encoding="utf-8")
+          PY
+          rm .github/workflows/incorporar-portada-time.yml
+      - name: Desa els canvis
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/img/portada-time-11s-2001.jpg html/1-sessio-1-el-mon-en-una-portada.html .github/workflows/incorporar-portada-time.yml
+          git commit -m "Incorpora localment la portada de TIME"
+          git push
