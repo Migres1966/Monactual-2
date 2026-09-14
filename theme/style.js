@@ -1,163 +1,45 @@
 var myTheme = {
     init: function () {
-        // Common functions
         if (this.inIframe()) $('body').addClass('in-iframe');
         if (!$('body').hasClass('exe-web-site')) return;
-        // Add menu and search bar togglers
-        var togglers =
-            '\
-            <button type="button" id="siteNavToggler" class="toggler" title="' +
-            $exe_i18n.menu +
-            '">\
-                <span class="sr-av">' +
-            $exe_i18n.menu +
-            '</span>\
-            </button>\
-            <button type="button" id="searchBarTogger" class="toggler" title="' +
-            $exe_i18n.search +
-            '">\
-                <span class="sr-av">' +
-            $exe_i18n.search +
-            '</span>\
-            </button>\
-        ';
+        var togglers='\\<button type="button" id="siteNavToggler" class="toggler" title="'+$exe_i18n.menu+'">\\<span class="sr-av">'+$exe_i18n.menu+'</span>\\</button>\\<button type="button" id="searchBarTogger" class="toggler" title="'+$exe_i18n.search+'">\\<span class="sr-av">'+$exe_i18n.search+'</span>\\</button>\\';
         $('#siteNav').before(togglers);
-        // Check the current NAV status
-        var url = window.location.href;
-        url = url.split('?');
-        if (url.length > 1) {
-            if (url[1].indexOf('nav=false') != -1) {
-                $('body').addClass('siteNav-off');
-                myTheme.params('add');
-            }
-        }
-        // Menu toggler
-        $('#siteNavToggler').on('click', function () {
-            if (myTheme.isLowRes()) {
-                $('#exe-client-search').hide();
-                if ($('body').hasClass('siteNav-off')) {
-                    $('body').removeClass('siteNav-off');
-                } else {
-                    if ($('#siteNav').isInViewport()) {
-                        $('body').addClass('siteNav-off');
-                        myTheme.params('add');
-                    }
-                }
-            } else {
-                $('body').toggleClass('siteNav-off');
-                myTheme.params(
-                    $('body').hasClass('siteNav-off') ? 'add' : 'remove'
-                );
-            }
-        });
-        // Search bar toggler
-        $('#searchBarTogger').on('click', function () {
-            var bar = $('#exe-client-search');
-            if (bar.is(':visible')) {
-                bar.hide();
-            } else {
-                if (myTheme.isLowRes()) {
-                    $('body').addClass('siteNav-off');
-                }
-                bar.show();
-                $('#exe-client-search-text').focus();
-            }
-        });
-        // Fixed navigation
+        var url=window.location.href.split('?');
+        if(url.length>1&&url[1].indexOf('nav=false')!=-1){$('body').addClass('siteNav-off');myTheme.params('add');}
+        $('#siteNavToggler').on('click',function(){if(myTheme.isLowRes()){$('#exe-client-search').hide();if($('body').hasClass('siteNav-off'))$('body').removeClass('siteNav-off');else if($('#siteNav').isInViewport()){$('body').addClass('siteNav-off');myTheme.params('add');}}else{$('body').toggleClass('siteNav-off');myTheme.params($('body').hasClass('siteNav-off')?'add':'remove');}});
+        $('#searchBarTogger').on('click',function(){var bar=$('#exe-client-search');if(bar.is(':visible'))bar.hide();else{if(myTheme.isLowRes())$('body').addClass('siteNav-off');bar.show();$('#exe-client-search-text').focus();}});
         $('#siteNav').wrap('<div id="sidebar-nav"></div>');
-        myTheme.checkNav();
-        $(window).bind('resize', function () {
-            myTheme.checkNav();
-        });
-        // Search form
-        this.searchForm();
-
-        // mover .page-title dentro de .page-content
-        this.movePageTitle();
+        myTheme.checkNav();$(window).bind('resize',function(){myTheme.checkNav();});this.searchForm();this.movePageTitle();
     },
-    inIframe: function () {
-        try {
-            return window.self !== window.top;
-        } catch (e) {
-            return true;
-        }
-    },
-    searchForm: function () {
-        $('#exe-client-search-text').attr('class', 'form-control');
-    },
-    isLowRes: function () {
-        return $('#siteNav').css('float') == 'none';
-    },
-    checkNav: function () {
-        var wrapper = $('#sidebar-nav');
-        var navH = $('#siteNav > ul').height(); // Menu height
-        navH = navH + 50;
-        if (navH < $(window).height()) wrapper.addClass('fixed');
-        else wrapper.removeClass('fixed');
-    },
-    param: function (e, act) {
-        if (act == 'add') {
-            var ref = e.href;
-            var con = '?';
-            if (ref.indexOf('.html?') != -1) con = '&';
-            var param = 'nav=false';
-            if (ref.indexOf(param) == -1) {
-                ref += con + param;
-                e.href = ref;
-            }
-        } else {
-            // This will remove all params
-            var ref = e.href;
-            ref = ref.split('?');
-            e.href = ref[0];
-        }
-    },
-    params: function (act) {
-        $('.nav-buttons a').each(function () {
-            myTheme.param(this, act);
-        });
-    },
-
-    // function that move the h2 outside the header
-    movePageTitle: function () {
-        const tryMove = () => {
-            const $header = $('.main-header .page-header');
-            const $title = $header.find('.page-title').first();
-
-            // Search container of content
-            let $content = $('.page-content').first();
-            if (!$content.length)
-                $content = $('.content, main .content').first();
-            if (!$content.length) $content = $('#main, #content').first();
-            if (!$content.length && $header.length)
-                $content = $header.nextAll(':not(header)').first();
-            if (!$content.length && $header.length) $content = $header.parent();
-
-            if ($header.length && $title.length && $content.length) {
-                $content.prepend($title); // move it to the start
-                return true;
-            }
-            return false;
-        };
-
-        if (tryMove()) return;
-
-        const observer = new MutationObserver(() => {
-            if (tryMove()) observer.disconnect();
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-    },
-    // 🔼
+    inIframe:function(){try{return window.self!==window.top;}catch(e){return true;}},
+    searchForm:function(){$('#exe-client-search-text').attr('class','form-control');},
+    isLowRes:function(){return $('#siteNav').css('float')=='none';},
+    checkNav:function(){var wrapper=$('#sidebar-nav'),navH=$('#siteNav > ul').height()+50;if(navH<$(window).height())wrapper.addClass('fixed');else wrapper.removeClass('fixed');},
+    param:function(e,act){if(act=='add'){var ref=e.href,con='?';if(ref.indexOf('.html?')!=-1)con='&';if(ref.indexOf('nav=false')==-1)e.href=ref+con+'nav=false';}else e.href=e.href.split('?')[0];},
+    params:function(act){$('.nav-buttons a').each(function(){myTheme.param(this,act);});},
+    movePageTitle:function(){const tryMove=()=>{const $header=$('.main-header .page-header'),$title=$header.find('.page-title').first();let $content=$('.page-content').first();if(!$content.length)$content=$('.content, main .content').first();if(!$content.length)$content=$('#main, #content').first();if(!$content.length&&$header.length)$content=$header.nextAll(':not(header)').first();if(!$content.length&&$header.length)$content=$header.parent();if($header.length&&$title.length&&$content.length){$content.prepend($title);return true;}return false;};if(tryMove())return;const observer=new MutationObserver(()=>{if(tryMove())observer.disconnect();});observer.observe(document.body,{childList:true,subtree:true});}
 };
+$(function(){myTheme.init();});
+$.fn.isInViewport=function(){var elementTop=$(this).offset().top,elementBottom=elementTop+$(this).outerHeight(),viewportTop=$(window).scrollTop(),viewportBottom=viewportTop+$(window).height();return elementBottom>viewportTop&&elementTop<viewportBottom;};
 
-$(function () {
-    myTheme.init();
+/* SA12 · Sessió 1 millorada */
+$(function(){
+  if(!/1-sessio-1-el-mon-en-una-portada\.html$/.test(window.location.pathname))return;
+  var css=`
+  .s1{--n:#082f49;--c:#0891b2;--g:#f59e0b;--r:#ea580c;--k:#102a43;max-width:1160px;margin:auto;color:var(--k);font-family:Inter,Aptos,Arial,sans-serif;line-height:1.62}.s1 *{box-sizing:border-box}.s1hero{padding:clamp(1.6rem,4vw,3.2rem);border-radius:24px;background:linear-gradient(120deg,#082f49,#0e7490 60%,#0891b2);color:#fff;box-shadow:0 18px 40px #082f4930;margin-bottom:1rem;position:relative;overflow:hidden}.s1hero:after{content:'PRESENT';position:absolute;right:-.4rem;bottom:-2.3rem;font-size:clamp(4rem,12vw,9rem);font-weight:900;opacity:.075}.s1hero h2{color:#fff!important;font-size:clamp(2rem,5vw,3.5rem);line-height:1.06;margin:.4rem 0 .8rem}.s1kick{text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:#bae6fd}.s1lead{font-size:1.15rem;max-width:800px}.s1grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1.1rem 0}.s1card{background:#fff;border:1px solid #cfe8ef;border-radius:17px;padding:1.1rem;box-shadow:0 7px 22px #082f4912}.s1card h3{margin:.1rem 0 .5rem!important;color:#0e7490!important}.s1card.a{border-top:7px solid var(--c)}.s1card.b{border-top:7px solid var(--g)}.s1card.d{border-top:7px solid var(--r)}.s1q{background:linear-gradient(90deg,#fff7df,#fff);border-left:8px solid var(--g);border-radius:13px;padding:1rem 1.2rem;margin:1.2rem 0}.s1task{background:var(--n);color:#fff;padding:1.2rem;border-radius:17px;margin:1.15rem 0}.s1task h3{color:#67e8f9!important;margin-top:0!important}.s1tag{display:inline-block;padding:.28rem .68rem;margin:.16rem;border-radius:999px;background:#e0f2fe;color:#075985;font-size:.84rem;font-weight:800}.s1task .s1tag{background:#fff;color:#082f49}.s1src{background:#fffaf0;border:1px solid #f1d9a9;border-radius:14px;padding:1rem 1.2rem;margin:1rem 0}.s1src img{width:100%!important;height:auto!important;border-radius:14px;box-shadow:0 8px 24px #082f4920}.s1 details{border:1px solid #b9dce6;border-radius:14px;margin:.8rem 0;background:#fff;overflow:hidden}.s1 summary{cursor:pointer;font-weight:800;color:#075985;padding:1rem 1.15rem;background:linear-gradient(90deg,#e0f2fe,#fff)}.s1in{padding:1rem 1.25rem}.s1ok{background:#ecfdf5;border-left:5px solid #0f766e;border-radius:9px;padding:.8rem 1rem;margin-top:.7rem}.s1table{overflow-x:auto}.s1 table{width:100%;border-collapse:collapse;background:#fff;margin:1rem 0}.s1 th{background:#075985;color:#fff}.s1 th,.s1 td{padding:.75rem;border:1px solid #dcecf0;vertical-align:top}.s1flow{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;justify-content:center}.s1flow span{background:#fff;border:1px solid #cfe4ea;border-radius:12px;padding:.65rem .8rem;font-weight:800}.s1hyp{background:#fff;color:#102a43;padding:1.1rem;border-radius:14px}.s1line{display:block;border-bottom:1px solid #9fb5c0;min-height:2rem;margin:.3rem 0 .9rem}@media(max-width:650px){.s1hero{border-radius:16px}.s1flow{display:grid;grid-template-columns:1fr}.s1flow i{text-align:center;transform:rotate(90deg)}}`;
+  $('<style>').text(css).appendTo('head');
+  var h=`<div class="s1">
+  <section class="s1hero"><div class="s1kick">Sessió 1 · El món en una portada</div><h2>Quin passat explica el nostre present?</h2><p class="s1lead">Començarem observant un problema del món actual i formularem una primera hipòtesi sobre les seues arrels històriques.</p></section>
+  <div class="s1grid"><div class="s1card a"><h3>👀 1. Observem</h3><p>Descrivim allò que realment veiem.</p></div><div class="s1card b"><h3>💭 2. Interpretem</h3><p>Proposem explicacions inicials.</p></div><div class="s1card d"><h3>📚 3. Contrastem</h3><p>Distingim fets, opinions i interpretacions.</p></div><div class="s1card a"><h3>🧠 4. Formulem</h3><p>Construïm una primera hipòtesi històrica.</p></div></div>
+  <div class="s1q"><strong>🎯 Repte de la sessió</strong><br><strong>Pots explicar un problema actual només mirant el present?</strong><br><br>Hui intentarem descobrir quines preguntes hem de fer-nos per comprendre les arrels històriques dels problemes actuals.</div>
+  <section class="s1src"><h3>👁 Mira abans de llegir</h3><p>Observa la imatge durant 30 segons. Encara no busques explicacions: concentra’t en els elements que pots identificar.</p><img src="https://content.vicensvivesdigital.com/images/og/prev_1042068_112198838331978954832_res_1024.png" alt="Imatge inicial per analitzar el món actual"><p><small>Primer observa. Després interpreta.</small></p></section>
+  <h2>Veig · Pense · Em pregunte</h2><div class="s1grid"><div class="s1card a"><h3>👁 VEIG</h3><p>Anota <strong>tres elements observables</strong>. No expliques encara què signifiquen.</p></div><div class="s1card b"><h3>💭 PENSE</h3><p>Formula <strong>dues interpretacions</strong> i completa: <em>«Pense que… perquè observe…»</em></p></div><div class="s1card d"><h3>❓ EM PREGUNTE</h3><p>Escriu una pregunta que necessite investigació històrica.</p></div></div>
+  <section class="s1task"><h3>🌍 Tria un repte del món actual</h3><p>En parelles, seleccioneu un problema i pregunteu-vos: <strong>quin passat pot ajudar-nos a entendre’l?</strong></p><p><span class="s1tag">🌍 Conflictes</span><span class="s1tag">🚶 Migracions</span><span class="s1tag">💰 Desigualtats</span><span class="s1tag">🌱 Canvi climàtic</span><span class="s1tag">🤖 Transformació del treball</span><span class="s1tag">🗳 Democràcia i autoritarisme</span></p></section>
+  <div class="s1table"><table><thead><tr><th>Observe</th><th>Interprete</th><th>Necessite investigar</th></tr></thead><tbody><tr><td>Què sabem o podem comprovar?</td><td>Quina explicació inicial proposem?</td><td>Quina pregunta històrica ens fem?</td></tr><tr><td style="height:85px">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></div>
+  <details open><summary>📖 Lectura breu · El present té història</summary><div class="s1in"><p>Les notícies solen explicar què ha passat hui o aquesta setmana. Però els conflictes, les desigualtats, les migracions o els canvis en el treball no apareixen de sobte. Són el resultat de decisions, relacions de poder i transformacions acumulades durant anys o segles.</p><p>Estudiar història no consisteix a buscar un únic origen. Un mateix problema pot combinar <strong>causes econòmiques, polítiques, socials, culturals i ambientals</strong>. També hem de diferenciar les <strong>causes profundes</strong> dels fets que actuen com a <strong>detonants</strong>.</p><div class="s1ok"><strong>Idea clau:</strong> comprendre el present implica reconstruir processos que han començat abans.</div></div></details>
+  <section class="s1src"><h3>⏳ Del passat al present</h3><div class="s1flow"><span>PASSAT</span><i>→</i><span>Causes profundes</span><i>→</i><span>Processos històrics</span><i>→</i><span>Detonants</span><i>→</i><span>PRESENT</span></div></section>
+  <details><summary>🧪 Laboratori · Fet, opinió o interpretació?</summary><div class="s1in"><p><strong>Fet:</strong> afirmació verificable. <strong>Opinió:</strong> valoració personal. <strong>Interpretació:</strong> explicació raonada basada en evidències.</p><div class="s1src"><p><strong>A.</strong> La Primera Guerra Mundial començà l’any 1914.</p><p><strong>B.</strong> La Primera Guerra Mundial fou el pitjor conflicte de la història.</p><p><strong>C.</strong> Les tensions imperialistes contribuïren a crear les condicions que conduïren a la guerra.</p></div><div class="s1ok"><strong>Recorda:</strong> una interpretació històrica no és una opinió lliure: ha d’estar sustentada en fonts i evidències.</div></div></details>
+  <section class="s1task"><h3>🧠 La meua primera hipòtesi</h3><p>Escriu una explicació provisional. La revisarem més endavant.</p><div class="s1hyp"><p><strong>Repte actual:</strong><span class="s1line"></span></p><p><strong>Crec que una de les seues arrels històriques podria ser…</strong><span class="s1line"></span></p><p><strong>Perquè…</strong><span class="s1line"></span></p><p><strong>Encara necessite comprovar…</strong><span class="s1line"></span></p><p><strong>Quina font podria consultar?</strong><span class="s1line"></span></p></div><p>🔒 <strong>Guarda aquesta hipòtesi.</strong> La recuperarem al final de la situació d’aprenentatge.</p></section>
+  <section class="s1q"><strong>🎟 Ticket d’eixida</strong><p><strong>1.</strong> Hui he descobert que…</p><p><strong>2.</strong> Ara pense que el present…</p><p><strong>3.</strong> Una pregunta que encara tinc és…</p><p><span class="s1tag">🟢 Ho tinc clar</span><span class="s1tag">🟡 Tinc alguns dubtes</span><span class="s1tag">🔴 Necessite ajuda</span></p></section></div>`;
+  var b=$('#20260912180000B00002');if(b.length){b.find('.box-title').text('Sessió 1 · El món en una portada');b.find('.box-content').html(h);$('#block-mtyoavn1-21anb7hm9').remove();}
 });
-
-$.fn.isInViewport = function () {
-    var elementTop = $(this).offset().top;
-    var elementBottom = elementTop + $(this).outerHeight();
-    var viewportTop = $(window).scrollTop();
-    var viewportBottom = viewportTop + $(window).height();
-    return elementBottom > viewportTop && elementTop < viewportBottom;
-};
