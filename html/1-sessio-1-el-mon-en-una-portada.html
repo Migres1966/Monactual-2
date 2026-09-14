@@ -632,7 +632,37 @@ summary:focus-visible {
 .sa12 h2{color:#082f49!important;font-size:1.75rem!important;margin:2.1rem 0 .8rem}.sa12 h3{color:#0e7490!important;margin:.25rem 0 .55rem!important}.sa12 p{max-width:82ch}
 .sa12-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:1rem;margin:1.2rem 0}.sa12-card{background:#fff;border:1px solid #cfe8ef;border-radius:17px;padding:1.2rem;box-shadow:0 7px 22px #082f4912}.sa12-card.accent{border-top:7px solid var(--sa12-cyan)}.sa12-card.gold{border-top:7px solid var(--sa12-gold)}.sa12-card.coral{border-top:7px solid var(--sa12-coral)}.sa12-card.green{border-top:7px solid var(--sa12-green)}
 .sa12-question{background:linear-gradient(90deg,#fff7df,#fff);border-left:8px solid var(--sa12-gold);border-radius:13px;padding:1rem 1.2rem;margin:1.2rem 0;box-shadow:0 5px 16px #082f4910}.sa12-question strong{color:#8a4f00}
-.sa12-image{margin:1.5rem auto 2rem;max-width:860px}.sa12-image img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:0 14px 34px #082f4930}.sa12-cover-stable{width:100%;aspect-ratio:3/4;background:#07131d url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIATgBOAAD/2wCEAAcHBwcHBwgICAgLCwoLCxAODQ0O
+.sa12-image{margin:1.5rem auto 2rem;max-width:860px}.sa12-image img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:0 14px 34px #082f4930}.sa12-cover-stable{display:block!important;width:100%!important;max-width:860px!important;height:auto!important;min-height:1px!important;visibility:visible!important;opacity:1!important;margin:0 auto;border-radius:18px;box-shadow:0 14px 34px #082f4930}.sa12-caption{font-size:.88rem;color:var(--sa12-muted);line-height:1.45;margin:.7rem .25rem 0!important}
+.sa12 details{border:1px solid #b9dce6;border-radius:14px;margin:1rem 0;background:#fff;overflow:hidden;box-shadow:0 4px 14px #082f490b}.sa12 summary{cursor:pointer;list-style:none;font-weight:800;color:#075985;padding:1rem 1.15rem;background:linear-gradient(90deg,#e0f2fe,#fff)}.sa12 summary::-webkit-details-marker{display:none}.sa12 summary:before{content:'+';display:inline-grid;place-items:center;width:1.55rem;height:1.55rem;background:#0891b2;color:#fff;border-radius:50%;margin-right:.65rem}.sa12 details[open] summary:before{content:'–'}.sa12-inside{padding:1rem 1.25rem 1.25rem}
+.sa12-reading{font-family:Georgia,serif;font-size:1.08rem;max-width:78ch}.sa12-reading p{max-width:78ch}
+.sa12-table-wrap{width:100%;overflow-x:auto;margin:1rem 0}.sa12-table{width:100%;min-width:680px;border-collapse:separate;border-spacing:0;border:1px solid #cfe4ea;border-radius:13px;overflow:hidden}.sa12-table th{background:#075985;color:#fff}.sa12-table th,.sa12-table td{padding:.75rem;text-align:left;vertical-align:top;border-bottom:1px solid #dcecf0}.sa12-table tr:last-child td{border-bottom:0}.sa12-table tr:nth-child(even) td{background:#f2fbfd}
+.sa12-source{background:var(--sa12-cream);border:1px solid #f1d9a9;border-radius:14px;padding:1.1rem 1.25rem;margin:1.15rem 0}.sa12-source h3{color:#8a4f00!important}.sa12-answer{background:#ecfdf5;border-left:5px solid #0f766e;border-radius:9px;padding:.85rem 1rem;margin:.8rem 0}.sa12-alert{background:#fff4ed;border-left:5px solid var(--sa12-coral);border-radius:9px;padding:.9rem 1.05rem;margin:1rem 0}
+.sa12-route{counter-reset:pas;list-style:none;padding:0;margin:1rem 0}.sa12-route li{counter-increment:pas;position:relative;padding:.85rem 1rem .85rem 3.35rem;margin:.6rem 0;background:#fff;border:1px solid #cfe4ea;border-radius:12px}.sa12-route li:before{content:counter(pas);position:absolute;left:1rem;top:.8rem;width:1.75rem;height:1.75rem;display:grid;place-items:center;border-radius:50%;background:#075985;color:#fff;font-weight:800}
+.sa12-task{background:var(--sa12-navy);color:#fff;padding:1.3rem;border-radius:17px;margin:1.3rem 0}.sa12-task h3{color:#67e8f9!important}.sa12-task .sa12-tag{background:#fff;color:#082f49}.sa12-task p{max-width:none}
+.sa12-quiz{background:#fff;border:1px solid #b9dce6;border-radius:16px;padding:1.2rem;margin:1.2rem 0;box-shadow:0 5px 18px #082f4910}.sa12-quiz label{display:block;padding:.7rem .8rem;margin:.45rem 0;border:1px solid #dcecf0;border-radius:9px;cursor:pointer}.sa12-quiz label:hover{background:#f0f9ff}.sa12-quiz button{border:0;border-radius:9px;background:#075985;color:#fff;padding:.65rem 1rem;margin:.5rem .4rem 0 0;font-weight:800;cursor:pointer}.sa12-feedback{padding:.75rem .9rem;border-radius:9px;font-weight:700}.sa12-feedback:empty{display:none}.sa12-feedback.ok{display:block;background:#ecfdf5;border-left:4px solid #0f766e}.sa12-feedback.ko{display:block;background:#fff2f0;border-left:4px solid #c9534d}
+.sa12-small{font-size:.9rem;color:var(--sa12-muted)}
+@media(max-width:650px){.sa12{font-size:.98rem}.sa12-hero{border-radius:16px}.sa12 h2{font-size:1.48rem!important}.sa12-table{font-size:.88rem}.sa12-image{margin-left:0;margin-right:0}}
+@media print{.sa12-hero,.sa12-card,.sa12 details,.sa12-task,.sa12-quiz{box-shadow:none!important}.sa12 details{break-inside:avoid}}
+</style>
+
+<div class="sa12">
+<section class="sa12-hero">
+<p class="sa12-kicker">SA12 · Sessió 1</p>
+<h2>El món en una portada</h2>
+<p class="sa12-lead">Una portada selecciona un instant, el converteix en relat i proposa una manera de mirar el món. Hui aprendrem a llegir-la com una font històrica, no com una simple il·lustració.</p>
+</section>
+
+<div class="sa12-meta">
+<span class="sa12-tag">1r de Batxillerat</span>
+<span class="sa12-tag">55 minuts</span>
+<span class="sa12-tag">Treball individual i cooperatiu</span>
+<span class="sa12-tag">Pensament històric</span>
+</div>
+
+<div class="sa12-question"><strong>Pregunta guia</strong><br>Com pot un esdeveniment d’un sol dia transformar la política, la societat i la percepció del món durant dècades?</div>
+
+<div class="sa12-image">
+<img class="sa12-cover-stable" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIATgBOAAD/2wCEAAcHBwcHBwgICAgLCwoLCxAODQ0O
 EBgREhESERgkFhoWFhoWJCAmHx0fJiA5LScnLTlCNzQ3Qk9HR09kX2SDg7AB
 BwcHBwcHCAgICAsLCgsLEA4NDQ4QGBESERIRGCQWGhYWGhYkICYfHR8mIDkt
 JyctOUI3NDdCT0dHT2RfZIODsP/CABEIBl0EsAMBIgACEQEDEQH/xAA2AAAB
@@ -4363,37 +4393,7 @@ hUmAikB9ErD4E4dxyIgjnwA3xtPDtRriYqBPNAOF20/Ja+x3yWR3sPyVH2H5
 LKfYfkgPgfki1/uOryVH2H5KGNxlboVGPQb5cF90QgqQ/nQswymkHrMw82p7
 RZI3gUr4mDhcxjvWFoQxD7C6qL3AuqZ7oXVRe4F1MXuBdTF7gXVsqsopdTF7
 gQgiBvLxUq7mv/4FndavgpUqVKlX/wCy/wD/2Q==
-") center/contain no-repeat;border-radius:18px;box-shadow:0 14px 34px #082f4930}.sa12-caption{font-size:.88rem;color:var(--sa12-muted);line-height:1.45;margin:.7rem .25rem 0!important}
-.sa12 details{border:1px solid #b9dce6;border-radius:14px;margin:1rem 0;background:#fff;overflow:hidden;box-shadow:0 4px 14px #082f490b}.sa12 summary{cursor:pointer;list-style:none;font-weight:800;color:#075985;padding:1rem 1.15rem;background:linear-gradient(90deg,#e0f2fe,#fff)}.sa12 summary::-webkit-details-marker{display:none}.sa12 summary:before{content:'+';display:inline-grid;place-items:center;width:1.55rem;height:1.55rem;background:#0891b2;color:#fff;border-radius:50%;margin-right:.65rem}.sa12 details[open] summary:before{content:'–'}.sa12-inside{padding:1rem 1.25rem 1.25rem}
-.sa12-reading{font-family:Georgia,serif;font-size:1.08rem;max-width:78ch}.sa12-reading p{max-width:78ch}
-.sa12-table-wrap{width:100%;overflow-x:auto;margin:1rem 0}.sa12-table{width:100%;min-width:680px;border-collapse:separate;border-spacing:0;border:1px solid #cfe4ea;border-radius:13px;overflow:hidden}.sa12-table th{background:#075985;color:#fff}.sa12-table th,.sa12-table td{padding:.75rem;text-align:left;vertical-align:top;border-bottom:1px solid #dcecf0}.sa12-table tr:last-child td{border-bottom:0}.sa12-table tr:nth-child(even) td{background:#f2fbfd}
-.sa12-source{background:var(--sa12-cream);border:1px solid #f1d9a9;border-radius:14px;padding:1.1rem 1.25rem;margin:1.15rem 0}.sa12-source h3{color:#8a4f00!important}.sa12-answer{background:#ecfdf5;border-left:5px solid #0f766e;border-radius:9px;padding:.85rem 1rem;margin:.8rem 0}.sa12-alert{background:#fff4ed;border-left:5px solid var(--sa12-coral);border-radius:9px;padding:.9rem 1.05rem;margin:1rem 0}
-.sa12-route{counter-reset:pas;list-style:none;padding:0;margin:1rem 0}.sa12-route li{counter-increment:pas;position:relative;padding:.85rem 1rem .85rem 3.35rem;margin:.6rem 0;background:#fff;border:1px solid #cfe4ea;border-radius:12px}.sa12-route li:before{content:counter(pas);position:absolute;left:1rem;top:.8rem;width:1.75rem;height:1.75rem;display:grid;place-items:center;border-radius:50%;background:#075985;color:#fff;font-weight:800}
-.sa12-task{background:var(--sa12-navy);color:#fff;padding:1.3rem;border-radius:17px;margin:1.3rem 0}.sa12-task h3{color:#67e8f9!important}.sa12-task .sa12-tag{background:#fff;color:#082f49}.sa12-task p{max-width:none}
-.sa12-quiz{background:#fff;border:1px solid #b9dce6;border-radius:16px;padding:1.2rem;margin:1.2rem 0;box-shadow:0 5px 18px #082f4910}.sa12-quiz label{display:block;padding:.7rem .8rem;margin:.45rem 0;border:1px solid #dcecf0;border-radius:9px;cursor:pointer}.sa12-quiz label:hover{background:#f0f9ff}.sa12-quiz button{border:0;border-radius:9px;background:#075985;color:#fff;padding:.65rem 1rem;margin:.5rem .4rem 0 0;font-weight:800;cursor:pointer}.sa12-feedback{padding:.75rem .9rem;border-radius:9px;font-weight:700}.sa12-feedback:empty{display:none}.sa12-feedback.ok{display:block;background:#ecfdf5;border-left:4px solid #0f766e}.sa12-feedback.ko{display:block;background:#fff2f0;border-left:4px solid #c9534d}
-.sa12-small{font-size:.9rem;color:var(--sa12-muted)}
-@media(max-width:650px){.sa12{font-size:.98rem}.sa12-hero{border-radius:16px}.sa12 h2{font-size:1.48rem!important}.sa12-table{font-size:.88rem}.sa12-image{margin-left:0;margin-right:0}}
-@media print{.sa12-hero,.sa12-card,.sa12 details,.sa12-task,.sa12-quiz{box-shadow:none!important}.sa12 details{break-inside:avoid}}
-</style>
-
-<div class="sa12">
-<section class="sa12-hero">
-<p class="sa12-kicker">SA12 · Sessió 1</p>
-<h2>El món en una portada</h2>
-<p class="sa12-lead">Una portada selecciona un instant, el converteix en relat i proposa una manera de mirar el món. Hui aprendrem a llegir-la com una font històrica, no com una simple il·lustració.</p>
-</section>
-
-<div class="sa12-meta">
-<span class="sa12-tag">1r de Batxillerat</span>
-<span class="sa12-tag">55 minuts</span>
-<span class="sa12-tag">Treball individual i cooperatiu</span>
-<span class="sa12-tag">Pensament històric</span>
-</div>
-
-<div class="sa12-question"><strong>Pregunta guia</strong><br>Com pot un esdeveniment d’un sol dia transformar la política, la societat i la percepció del món durant dècades?</div>
-
-<div class="sa12-image">
-<div class="sa12-cover-stable" role="img" aria-label="Portada de la revista Time dedicada als atemptats de l’11 de setembre de 2001, amb les Torres Bessones entre fum"></div>
+" alt="Portada de la revista Time dedicada als atemptats de l’11 de setembre de 2001, amb les Torres Bessones entre fum" width="1200" height="1600" style="display:block!important;width:100%!important;max-width:860px!important;height:auto!important;visibility:visible!important;opacity:1!important;margin:0 auto;border-radius:18px;">
 <p class="sa12-caption"><strong>Font visual 1:</strong> portada de <em>Time</em> sobre els atemptats de l’11 de setembre de 2001. Observa abans de llegir cap explicació: què mostra, què omet i quina emoció construeix?</p>
 </div>
 
