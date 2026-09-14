@@ -15,7 +15,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p content/img
-          curl --fail --location --retry 3             --output content/img/portada-time-11s-2001.jpg             "https://content.time.com/time/covers/0,16641,20010914,00.jpg"
+          curl --fail --location --retry 3             --output content/img/portada-time-11s-2001.jpg             "https://cadenaser.com/resizer/v2/O2564AUCGRP5LDXHJ56AC74EPA.jpg?auth=b932b278190f9b6525106fe64289ce91db588c685942fbc2cc44430c9e32efe6&quality=70&width=1200"
           test -s content/img/portada-time-11s-2001.jpg
           python3 - <<'PY'
           from pathlib import Path
